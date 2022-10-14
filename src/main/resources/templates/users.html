@@ -1,0 +1,32 @@
+<div th:replace="fragments/head"></div>
+<body>
+<div class="container">
+    <div th:replace="fragments/navbar"></div>
+    <ul class="nav nav-tabs">
+    <li role="presentation" th:classappend="${filter == 'all' ? 'active' : '' }">
+        <a href="/users">All</a></li>
+        <li role="presentation" th:classappend="${filter == 'followers' ? 'active' : '' }">
+    <a href="/users?filter=followers">Followers</a></li>
+<li role="presentation" th:classappend="${filter == 'following' ? 'active' : '' }">
+    <a href="/users?filter=following">Following</a></li>
+</ul><br/>
+    <h2>Users</h2>
+    <div class="list-group" th:each="user:${users}">
+            <a th:href="@{/users/} + ${user.username}" class="list-group-item list-group-item-action">
+            <div class="row">
+                <div class="col col-sm-6">
+                    <h5 class="mb-1" style="color: #00aced"><i class="fab fa-twitter"></i> @<span th:text="${user.username}"></span></h5>	
+                    <h5 class="mb-1"><span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span><span th:if="${!followingStatus.containsKey(user.username)}">(Me)</span></h5>
+                </div>
+                <div class="col col-sm-2 col-sm-offset-4 text-right">
+                    <h5 class="mb-1"><span th:text="${tweetCounts.get(user.username)}"></span> tweets</h5>
+                   
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div th:if="${#lists.isEmpty(users) and filter == 'followers'}"><center><h3>You don't have any followers</h3></center></div>
+<div th:if="${#lists.isEmpty(users) and filter == 'following'}"><center><h3>You're not following anyone</h3></center></div>
+</body>
+</html>
