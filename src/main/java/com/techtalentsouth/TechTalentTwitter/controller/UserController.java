@@ -45,10 +45,7 @@ public class UserController {
 		} else if (filter.equalsIgnoreCase("following")) {
 			users = usersFollowing;
 			model.addAttribute("filter", "following");
-		} else {
-			users = userService.findAll();
-			model.addAttribute("filter", "all");
-		}
+		} 
 		model.addAttribute("users", users);
 
 		SetTweetCounts(users, model);

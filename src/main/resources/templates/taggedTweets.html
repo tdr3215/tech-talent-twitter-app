@@ -8,7 +8,7 @@
 		<div class="list-group" th:each="tweet:${tweetList}">
   			<div class="list-group-item list-group-item-action">
     			<div class="d-flex w-100 justify-content-between">
-      				<a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span th:text="${tweet.user.username}"></span></a><small th:text="${tweet.date}"></small>
+      				@<a class="username" th:href="@{/users/} + ${tweet.user.username}"><span th:text="${tweet.user.username}"></span></a> <small th:text="${tweet.date}"></small>
     			</div>
     			<p class="mb-1" th:utext="${tweet.message}"></p>
     		</div>
